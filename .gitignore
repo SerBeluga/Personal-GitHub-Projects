@@ -7,7 +7,7 @@
 # BlueJ files
 *.ctxt
 
-#Environment variables
+# Environment variables
 .env
 
 # Mobile Tools for Java (J2ME)
