@@ -8,7 +8,7 @@ public class AssemblyAPIDemo {
 
     public static void main(String[] args) throws Exception { 
 
-        String assembly = "https.//api.assemblyai.com/v2/transcript";
+        String assembly = "https://api.assemblyai.com/v2/transcript";
         URI api = new URI(assembly); 
 
 
