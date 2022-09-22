@@ -2,9 +2,16 @@ package project;
 
 public class Transcript {
 
-    private String audio_url;
+    private String audioURL;
     private String id; 
+   
+    public String getAudioURL() {
+        return audioURL;
+    }
 
+    public void setAudioURL(String audioURL) {
+        this.audioURL = audioURL;
+    }
     
     public String getId() {
         return id;
@@ -14,12 +21,5 @@ public class Transcript {
         this.id = id;
     }
 
-    public String getAudio_url() {
-        return audio_url;
-    }
-
-    public void setAudio_url(String audio_url) {
-        this.audio_url = audio_url;
-    } 
-    
+   
 }
