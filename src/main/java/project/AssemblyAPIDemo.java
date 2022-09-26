@@ -18,14 +18,14 @@ public class AssemblyAPIDemo {
 
     public static void main(String[] args) throws Exception {
 
-        String maximius = "https://github.com/SerBeluga/Personal-GitHub-Projects/blob/master/src/Audio%20Files/Maximus%20Decimus%20Meridius.mp3";
-        String DEATH = null; // TODO: REPLACE WITH THEODEN DEATH SOUNDBYTE
-        String assembly = "https://api.assemblyai.com/v2/transcript";
+        String maximius = "https://github.com/SerBeluga/Personal-GitHub-Projects/blob/master/src/Audio%20Files/Maximus%20Decimus%20Meridius.mp3?raw=true";
+        String deathTheoden = "https://github.com/SerBeluga/Personal-GitHub-Projects/blob/master/src/Audio%20Files/theoden%20DEATH%20SPEECH.mp3?raw=true";
+        String assembly = "https://api.assemblyai.com/v2/transcript/";
         URI api = new URI(assembly);
 
         // Was added to protect my api key, to run on your system must make a custom
         // .env file and declare there. EX. MY_API_KEY=asdfklassdklf
-        Dotenv envVar = Dotenv.configure()
+        Dotenv env = Dotenv.configure()
                 .directory("./src/main/java/project")
                 .ignoreIfMalformed()
                 .ignoreIfMissing()
@@ -33,19 +33,25 @@ public class AssemblyAPIDemo {
 
         // TODO: REMOVE. WAS FOR TESTING
         // ONLY*********************************************
-        System.out.println(String.format(("KEY IS %s."), envVar.get("API_KEY")));
+        System.out.println(String.format(("KEY IS %s."), env.get("API_KEY")));
 
         Transcript audioClip1 = new Transcript();
-        audioClip1.setAudioURL(maximius);
-        Gson gson = new Gson();
-        String jsonMaximus = gson.toJson(audioClip1);
+        audioClip1.setAudio_url(maximius);
+        Gson gson1 = new Gson();
+        String jsonMaximus = gson1.toJson(audioClip1);
+
+        Transcript theoden = new Transcript(); 
+        theoden.setAudio_url(deathTheoden);
+        Gson gson2 = new Gson(); 
+        String jsonDEATH = gson2.toJson(theoden);
 
         // TODO: REMOVE FOR TESTING ONLY!
         System.out.println("*******" + jsonMaximus);
+        System.out.println("*******" + jsonDEATH);
 
         HttpRequest postReq = HttpRequest.newBuilder()
                 .uri(api)
-                .header("Authorization", envVar.get("API_KEY"))
+                .header("Authorization", env.get("API_KEY"))
                 .POST(BodyPublishers.ofString(jsonMaximus))
                 .build();
 
