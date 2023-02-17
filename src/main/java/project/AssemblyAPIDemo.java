@@ -11,13 +11,17 @@ import java.net.http.HttpResponse.BodyHandlers;
 
 import com.google.gson.Gson;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class AssemblyAPIDemo {
 
     private static String jsonOutput;
+    private static Logger logs = LoggerFactory.getLogger(AssemblyAPIDemo.class); //added logs just for practice
 
     public static void main(String[] args) throws Exception {
 
-        String maximius = "https://bit.ly/GladiatorAssembly";
+        String maximius = "https://bit.ly/GladiatorAssembly"; //added bit.lys to make links more managable, really long before
         String deathTheoden = "https://bit.ly/TheodenAssembly";
         String speakItalian = "https://bit.ly/SpeakItalianAssembly";
         String assembly = "https://api.assemblyai.com/v2/transcript/";
@@ -31,9 +35,8 @@ public class AssemblyAPIDemo {
                 .ignoreIfMissing()
                 .load();
 
-        // TODO: REMOVE. WAS FOR TESTING
-        // ONLY*********************************************
-        System.out.println(String.format(("KEY IS %s."), env.get("API_KEY")));
+        //TODO:REMOVE WAS FOR TESTING
+        logs.info(String.format(("KEY IS %s."), env.get("API_KEY")));
 
         Transcript gladiator = new Transcript();
         gladiator.setAudio_url(maximius);
@@ -50,17 +53,17 @@ public class AssemblyAPIDemo {
         String jsonDEATH = gsonTheo.toJson(theoden);
 
         Transcript kogJerusalem = new Transcript(); 
-        kogJerusalem.setAudio_url(speakItalian);
+        kogJerusalem.setAudio_url(speakItalian); // not setting specific params on this one just to see the difference
         Gson gsonKog = new Gson();
         String jsonSpeakItalian = gsonKog.toJson(kogJerusalem);
 
         String testMaximus = String.format("**** TEST MAXIMUS %s", jsonMaximus); 
         String testDEATH = String.format("**** TEST THEODEN %s", jsonDEATH); 
         String testKog = String.format("**** TEST WHERE THE MEN SPEAK ITALIAN %s", jsonSpeakItalian); 
-        // TODO: REMOVE FOR TESTING ONLY!
-        System.out.println(testMaximus);
-        System.out.println(testDEATH);
-        System.out.println(testKog);
+        //TODO: Everthing clears for now on the json front, lets see if the api will consume my transcript object
+        logs.info(testMaximus);
+        logs.info(testDEATH);
+        logs.info(testKog);
 
         HttpRequest postReq = HttpRequest.newBuilder()
                 .uri(api)
@@ -70,7 +73,7 @@ public class AssemblyAPIDemo {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> postResp = client.send(postReq, BodyHandlers.ofString());
-        System.out.println(postResp.body());
+        logs.info(postResp.body());
 
     }
 
