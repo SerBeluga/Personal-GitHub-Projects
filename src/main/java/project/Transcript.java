@@ -5,6 +5,8 @@ public class Transcript {
     private String audio_url;
     private String id;
     private String status; 
+    private Boolean punctuate; 
+    private Boolean format_text; 
 
     public String getStatus() {
         return status;
@@ -28,6 +30,22 @@ public class Transcript {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Boolean getPunctuate() {
+        return punctuate;
+    }
+
+    public void setPunctuate(Boolean punctuate) {
+        this.punctuate = punctuate;
+    }
+
+    public Boolean getFormat_text() {
+        return format_text;
+    }
+    
+    public void setFormat_text(Boolean format_text) {
+        this.format_text = format_text;
     }
 
    

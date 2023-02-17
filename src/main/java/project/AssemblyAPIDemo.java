@@ -17,8 +17,9 @@ public class AssemblyAPIDemo {
 
     public static void main(String[] args) throws Exception {
 
-        String maximius = "https://github.com/SerBeluga/Personal-GitHub-Projects/blob/master/src/Audio%20Files/Maximus%20Decimus%20Meridius.mp3?raw=true";
-        String deathTheoden = "https://github.com/SerBeluga/Personal-GitHub-Projects/blob/master/src/Audio%20Files/theoden%20DEATH%20SPEECH.mp3?raw=true";
+        String maximius = "https://bit.ly/GladiatorAssembly";
+        String deathTheoden = "https://bit.ly/TheodenAssembly";
+        String speakItalian = "https://bit.ly/SpeakItalianAssembly";
         String assembly = "https://api.assemblyai.com/v2/transcript/";
         URI api = new URI(assembly);
 
@@ -34,21 +35,32 @@ public class AssemblyAPIDemo {
         // ONLY*********************************************
         System.out.println(String.format(("KEY IS %s."), env.get("API_KEY")));
 
-        Transcript audioClip1 = new Transcript();
-        audioClip1.setAudio_url(maximius);
-        Gson gson1 = new Gson();
-        String jsonMaximus = gson1.toJson(audioClip1);
+        Transcript gladiator = new Transcript();
+        gladiator.setAudio_url(maximius);
+        gladiator.setPunctuate(true); //adds punctuation from AssemblyAPI 
+        gladiator.setFormat_text(true); //adds auto text formatting from AssemblyAPI
+        Gson gsonGlad = new Gson();
+        String jsonMaximus = gsonGlad.toJson(gladiator);
 
         Transcript theoden = new Transcript(); 
         theoden.setAudio_url(deathTheoden);
-        Gson gson2 = new Gson(); 
-        String jsonDEATH = gson2.toJson(theoden);
+        theoden.setPunctuate(true);
+        theoden.setFormat_text(true);
+        Gson gsonTheo = new Gson(); 
+        String jsonDEATH = gsonTheo.toJson(theoden);
 
-        String testMaximus = String.format("TEST MAXIMUS %s", jsonMaximus); 
-        String testDEATH = String.format("TEST THEODEN %s", jsonDEATH); 
+        Transcript kogJerusalem = new Transcript(); 
+        kogJerusalem.setAudio_url(speakItalian);
+        Gson gsonKog = new Gson();
+        String jsonSpeakItalian = gsonKog.toJson(kogJerusalem);
+
+        String testMaximus = String.format("**** TEST MAXIMUS %s", jsonMaximus); 
+        String testDEATH = String.format("**** TEST THEODEN %s", jsonDEATH); 
+        String testKog = String.format("**** TEST WHERE THE MEN SPEAK ITALIAN %s", jsonSpeakItalian); 
         // TODO: REMOVE FOR TESTING ONLY!
         System.out.println(testMaximus);
         System.out.println(testDEATH);
+        System.out.println(testKog);
 
         HttpRequest postReq = HttpRequest.newBuilder()
                 .uri(api)
