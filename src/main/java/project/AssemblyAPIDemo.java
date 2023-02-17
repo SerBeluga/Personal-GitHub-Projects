@@ -7,7 +7,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse.BodyHandler;
 import java.net.http.HttpResponse.BodyHandlers;
 
 import com.google.gson.Gson;
@@ -45,9 +44,11 @@ public class AssemblyAPIDemo {
         Gson gson2 = new Gson(); 
         String jsonDEATH = gson2.toJson(theoden);
 
+        String testMaximus = String.format("TEST MAXIMUS %s", jsonMaximus); 
+        String testDEATH = String.format("TEST THEODEN %s", jsonDEATH); 
         // TODO: REMOVE FOR TESTING ONLY!
-        System.out.println("*******" + jsonMaximus);
-        System.out.println("*******" + jsonDEATH);
+        System.out.println(testMaximus);
+        System.out.println(testDEATH);
 
         HttpRequest postReq = HttpRequest.newBuilder()
                 .uri(api)
