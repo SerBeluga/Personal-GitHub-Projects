@@ -36,7 +36,7 @@ public class AssemblyAPIDemo {
                 .load();
 
         //TODO:REMOVE WAS FOR TESTING
-        logs.info(String.format(("KEY IS %s."), env.get("API_KEY")));
+        logs.debug(String.format(("KEY IS %s."), env.get("API_KEY")));
 
         Transcript gladiator = new Transcript();
         gladiator.setAudio_url(maximius);
@@ -61,9 +61,9 @@ public class AssemblyAPIDemo {
         String testDEATH = String.format("**** TEST THEODEN %s", jsonDEATH); 
         String testKog = String.format("**** TEST WHERE THE MEN SPEAK ITALIAN %s", jsonSpeakItalian); 
         //TODO: Everthing clears for now on the json front, lets see if the api will consume my transcript object
-        logs.info(testMaximus);
-        logs.info(testDEATH);
-        logs.info(testKog);
+        logs.debug(testMaximus);
+        logs.debug(testDEATH);
+        logs.debug(testKog);
 
         HttpRequest postReq = HttpRequest.newBuilder()
                 .uri(api)
@@ -73,7 +73,7 @@ public class AssemblyAPIDemo {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> postResp = client.send(postReq, BodyHandlers.ofString());
-        logs.info(postResp.body());
+        logs.debug(postResp.body());
 
     }
 
