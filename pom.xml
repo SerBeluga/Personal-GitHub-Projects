@@ -14,8 +14,8 @@
   <url>http://www.example.com</url>
 
   <!--TODO:
-  MAKE SURE TO USE THE MOST RECENT JAVA RUNTIME FOR THE MAVEN COMPILER PROP; WILL GET ANGRY IF YOU
-  DONT HAVE MOST RECENT VERSION-->
+  MAKE SURE TO USE THE CORRECT JAVA RUNTIME FOR THE MAVEN COMPILER PROP; WILL GET ANGRY IF YOU
+  DONT HAVE PROPER JDK INSTALLED-->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
@@ -26,7 +26,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -42,7 +42,7 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.2.6</version>
+      <version>1.2.9</version>
     </dependency>
   </dependencies>
 

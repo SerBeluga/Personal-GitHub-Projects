@@ -17,15 +17,17 @@ import org.slf4j.LoggerFactory;
 public class AssemblyAPIDemo {
 
     private static String jsonOutput;
-    private static Logger logs = LoggerFactory.getLogger(AssemblyAPIDemo.class); //added logs just for practice
+    private static final Logger logs = LoggerFactory.getLogger(AssemblyAPIDemo.class); //added logs just for practice
 
     public static void main(String[] args) throws Exception {
 
-        String maximius = "https://bit.ly/GladiatorAssembly"; //added bit.lys to make links more managable, really long before
+        String maximius = "https://bit.ly/GladiatorAssembly"; //added bit.lys to make links more manageable, really long before
         String deathTheoden = "https://bit.ly/TheodenAssembly";
         String speakItalian = "https://bit.ly/SpeakItalianAssembly";
-        String assembly = "https://api.assemblyai.com/v2/transcript/";
-        URI api = new URI(assembly);
+        final String ASSEMBLY = "https://api.assemblyai.com/v2/transcript/";
+        final URI API = new URI(ASSEMBLY);
+        final Gson mainGson = new Gson();
+
 
         // Was added to protect my api key, to run on your system must make a custom
         // .env file and declare there. EX. MY_API_KEY=asdfklassdklf
@@ -38,42 +40,35 @@ public class AssemblyAPIDemo {
         //TODO:REMOVE WAS FOR TESTING
         logs.debug(String.format(("KEY IS %s."), env.get("API_KEY")));
 
-        Transcript gladiator = new Transcript();
-        gladiator.setAudio_url(maximius);
-        gladiator.setPunctuate(true); //adds punctuation from AssemblyAPI 
-        gladiator.setFormat_text(true); //adds auto text formatting from AssemblyAPI
-        Gson gsonGlad = new Gson();
-        String jsonMaximus = gsonGlad.toJson(gladiator);
+        Transcript gladiator = new Transcript(maximius, true, true); //adds punctuation from AssemblyAPI, adds auto text formatting from AssemblyAPI
+        String jsonMaximus = mainGson.toJson(gladiator);
 
-        Transcript theoden = new Transcript(); 
-        theoden.setAudio_url(deathTheoden);
-        theoden.setPunctuate(true);
-        theoden.setFormat_text(true);
-        Gson gsonTheo = new Gson(); 
-        String jsonDEATH = gsonTheo.toJson(theoden);
+        Transcript theoden = new Transcript(deathTheoden, true, true);
+        String jsonDeath = mainGson.toJson(theoden);
 
-        Transcript kogJerusalem = new Transcript(); 
-        kogJerusalem.setAudio_url(speakItalian); // not setting specific params on this one just to see the difference
-        Gson gsonKog = new Gson();
-        String jsonSpeakItalian = gsonKog.toJson(kogJerusalem);
+        Transcript kogJerusalem = new Transcript(speakItalian); //using just url to get default params and see if diff
+        String jsonSpeakItalian = mainGson.toJson(kogJerusalem);
 
         String testMaximus = String.format("**** TEST MAXIMUS %s", jsonMaximus); 
-        String testDEATH = String.format("**** TEST THEODEN %s", jsonDEATH); 
+        String testDEATH = String.format("**** TEST THEODEN %s", jsonDeath);
         String testKog = String.format("**** TEST WHERE THE MEN SPEAK ITALIAN %s", jsonSpeakItalian); 
         //TODO: Everthing clears for now on the json front, lets see if the api will consume my transcript object
         logs.debug(testMaximus);
         logs.debug(testDEATH);
         logs.debug(testKog);
 
-        HttpRequest postReq = HttpRequest.newBuilder()
-                .uri(api)
-                .header("Authorization", env.get("API_KEY"))
+        HttpRequest postReqMaximus = HttpRequest.newBuilder()
+                .uri(API)
+                .header("Authorization", env.get("API_KEY")) //env.get looks in your .env file for a variable declared in double brackets
                 .POST(BodyPublishers.ofString(jsonMaximus))
                 .build();
 
         HttpClient client = HttpClient.newHttpClient();
-        HttpResponse<String> postResp = client.send(postReq, BodyHandlers.ofString());
+        HttpResponse<String> postResp = client.send(postReqMaximus, BodyHandlers.ofString());
         logs.debug(postResp.body());
+
+        gladiator = mainGson.fromJson(postResp.body(), Transcript.class);
+
 
     }
 
