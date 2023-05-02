@@ -1,0 +1,8 @@
+---
+  - name: ilovenano
+    hosts: centos
+    tasks:
+      - name: ensure nano is installed
+        yum: 
+          name: nano
+          state: latest
