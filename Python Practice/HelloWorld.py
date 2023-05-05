@@ -56,6 +56,14 @@ if creditScoreGood and not criminalRecord:
 
 print(f"Down Payment for Home is: ${downPayment}")
 
+name = "Jacoby"
+
+if len(name) < 3 :
+    print("Name length must be at least 3 characters.")
+elif len(name) > 50: 
+    print("Name must be a maximum of 50 characters.")
+else: 
+    print("Your name is gucci!")
 
 print('#' * 30)
 # ##########################################################################
