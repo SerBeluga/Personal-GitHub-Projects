@@ -3,12 +3,15 @@
 # age = 20
 # isNewPatient = True 
 
+# ##########################################################################
 characterName = "Diabetic Beluga"
 print(characterName[8])
 print(characterName[-2])
 print(characterName[1:-1])
 print(characterName[0:])
 print(characterName[:])
+
+# ##########################################################################
 
 # ##########################################################################
 # welcomeMsg = "************Welcome to Goyo's Simple Addition Calculator. To use please input two numbers to add.**************"
