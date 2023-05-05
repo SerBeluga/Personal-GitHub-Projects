@@ -4,14 +4,35 @@
 # isNewPatient = True 
 
 # ##########################################################################
+#strings as arrays inherently in py
 characterName = "Diabetic Beluga"
 print(characterName[8])
 print(characterName[-2])
 print(characterName[1:-1])
 print(characterName[0:])
 print(characterName[:])
+print('#' * 30)
 
 # ##########################################################################
+#formatted strings in py + methods
+archType1 = "Warrior"
+specialization1 = "Guardian"
+msg = f"Goyo is a {archType1} Archtype with a [{specialization1}] specialization. That means he's the tank dude..."
+print(msg)
+print(len(msg))
+print(msg.upper())
+print(msg.lower())
+print(msg.title())
+print(f"INDEX OF G: {msg.find('G')}")
+print(msg.replace("tank", "on the frontline"))
+print("Archtype" in msg)
+print('#' * 30)
+
+# ##########################################################################
+#math functions in py YIPEEEEEEEEEEEEEEEEE ** 5
+x = 2.9
+print(round(x))
+print(abs(-2.9))
 
 # ##########################################################################
 # welcomeMsg = "************Welcome to Goyo's Simple Addition Calculator. To use please input two numbers to add.**************"
@@ -60,13 +81,15 @@ i = 0
 while i < len(numbers): 
     print(numbers[i])
     i += 1
+print('#' * 30)
 ##########################################################################
 classes = ["Monk", "Fighter", "Wizard", "Cleric", "Ranger", "Artificer"] #A LIST AKA AN ARRAY IN PY 
 for c in classes: #EQUIVALENT OF A FOR STRING A: STRINGS in Java
     print(c)
+print('#' * 30)
 
 ##########################################################################
 archtypes = ("Warrior", "Magic Caster", "Rogue/Thief", "Clergy" ) # example of a tuple AKA an ENUM in Java
 print(archtypes)
-
+print('#' * 30)
 
