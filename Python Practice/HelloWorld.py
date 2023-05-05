@@ -1,3 +1,5 @@
+import math
+
 # firstName = "John"
 # lastName = "Smith"
 # age = 20
@@ -33,11 +35,29 @@ print('#' * 30)
 x = 2.9
 print(round(x))
 print(abs(-2.9))
+print(math.ceil(x))
+print(math.floor(x))
 
+print('#' * 30)
+# ##########################################################################
+#if statements
+negotiatedPrice = 1000000.00
+creditScoreGood = True 
+criminalRecord = False
+downPayment = 0.0
+
+if creditScoreGood: 
+    downPayment = negotiatedPrice * 0.10
+else: 
+    downPayment = negotiatedPrice * 0.20
+
+if creditScoreGood and not criminalRecord: 
+    print("Eligible for loan")
+
+print(f"Down Payment for Home is: ${downPayment}")
 
 
 print('#' * 30)
-
 # ##########################################################################
 # welcomeMsg = "************Welcome to Goyo's Simple Addition Calculator. To use please input two numbers to add.**************"
 # print(welcomeMsg.upper())
