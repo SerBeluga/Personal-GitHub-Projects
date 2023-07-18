@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h2>Different Ways to Display Information</h2>
+
+        <p id = "code"></p>
+
+        <script> 
+            document.getElementById("code").innerHTML = "Hello World! This is from setting of the innerHTML!"; 
+        </script> 
+
+        <p>Hello World! I am from within the paragraph tag in the HTML page WOWZEERS! </p>
+
+        <script> document.write("Hello World 3! I am from the first document.write() function!")</script> 
+
+        <br> 
+        <br> 
+
+        <button onclick = "window.alert('Hello World 4! I am from the window alert, actually kind of cool!')">
+            Click Me to View a Window Alert
+        </button>
+
+        <br> 
+        <br> 
+
+        <button onclick="document.write('Hello World 5 I am from the SECOND document.write() function')"> 
+            Click Me to Clear the Existing HTML
+        </button>
+
+        <script>console.log("Hello World 6! This is a std console message...")</script> 
+
+    </body>
+</html>
