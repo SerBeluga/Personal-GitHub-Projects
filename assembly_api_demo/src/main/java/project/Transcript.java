@@ -4,6 +4,7 @@ public class Transcript {
 
     private String audio_url;
     private String id;
+    private String text; 
     private String status; 
     private Boolean punctuate; 
     private Boolean format_text;
@@ -16,6 +17,11 @@ public class Transcript {
         this.status = status;
         this.punctuate = punctuate;
         this.format_text = format_text;
+    }
+
+    public Transcript(String id, String status) {
+        this.id = id;
+        this.status = status;
     }
 
     public Transcript(String audio_url) {
@@ -50,6 +56,14 @@ public class Transcript {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Boolean getPunctuate() {
