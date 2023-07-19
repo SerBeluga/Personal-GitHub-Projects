@@ -45,9 +45,10 @@ public class AssemblyAPIDemo {
         Transcript kogJerusalem = new Transcript(speakItalian); //using just url to get default params and see if diff
         String jsonSpeakItalian = mainGson.toJson(kogJerusalem);
 
-        String testMaximus = String.format("**** TEST MAXIMUS %s", jsonMaximus); 
-        String testDEATH = String.format("**** TEST THEODEN %s", jsonDeath);
-        String testKog = String.format("**** TEST WHERE THE MEN SPEAK ITALIAN %s", jsonSpeakItalian); 
+        //for testing only
+        // String testMaximus = String.format("**** TEST MAXIMUS %s", jsonMaximus); 
+        // String testDEATH = String.format("**** TEST THEODEN %s", jsonDeath);
+        // String testKog = String.format("**** TEST WHERE THE MEN SPEAK ITALIAN %s", jsonSpeakItalian); 
 
         //AYO IT WORKS nice...
         HttpRequest postReqMaximus = HttpRequest.newBuilder()
@@ -64,16 +65,25 @@ public class AssemblyAPIDemo {
         //check for id from response body
         logs.debug(maximus.getId());
 
-        HttpRequest getReqMaximus = HttpRequest.newBuilder()
+        HttpRequest getReqMax = HttpRequest.newBuilder()
             .uri(new URI(assemblyEndpoint + "/"  + maximus.getId()))
-            .header("Authoriztion", env.get("API_KEY"))
+            .header("Authorization", env.get("API_KEY"))
             .build(); 
 
-        HttpResponse<String> getRespMax = clientMaximus.send(getReqMaximus, BodyHandlers.ofString()); 
-        maximus = mainGson.fromJson(getRespMax.body(), Transcript.class); 
-
+        if("completed".equals(maximus.getStatus())){
+            HttpResponse<String> getRespMax = clientMaximus.send(getReqMax, BodyHandlers.ofString()); 
+            maximus = mainGson.fromJson(getRespMax.body(), Transcript.class); 
+            logs.debug(String.format("Status: %s", maximus.getStatus()));
+            logs.debug("Transcription completed!");
+            logs.debug(String.format("TRANSCRIPTION: %s", maximus.getText()));
         
+        }
+        else if("processing".equals(maximus.getStatus())){
+            logs.debug(String.format("Status: %s", maximus.getStatus()));
+        }
 
+
+    
     }
 
 }
